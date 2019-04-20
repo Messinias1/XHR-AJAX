@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Stockholm Weather</title>
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link rel="stylesheet" href="stylesSE.css" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1 id="title">Current Weather in Stockholm</h1>
+    <br><br>
+    <button id="button">Show Me The Weather</button>
+    <div id="data"></div>
+
+    <script>
+        document.getElementById('button').addEventListener('click', loadData);
+        
+        // Load weather data
+        function loadData() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?q=INSERT-CITY-HERE&appid=INSERT-API-KEY-HERE=metric', true);
+
+            xhr.onload = function() {
+                if (this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+
+                    var output = '';
+                    
+                    var temperature = data.main.temp;
+                    var conditions = data.weather[0]['main'];
+                    var humidity = data.main.humidity;
+                    var windSpeed = data.wind.speed;
+                    
+                        output +=
+                            '<div class="data">' +
+                            '<ul>' +
+                            '<li id="temp"> ' + temperature +' '+'°c </li>' +
+                            '<li> ' + conditions + '</li>' +
+                            '<li> Humidity: ' + humidity +' '+'%</li>' +
+                            '<li> Wind Speed: ' + windSpeed +' '+'km/h</li>' +
+                            '</ul>' +
+                            '</div>';
+                    
+
+                    document.getElementById('data').innerHTML = output;
+                }
+            };
+
+            xhr.send();
+        }
+    </script>
+</body>
+
+</html>

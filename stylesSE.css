@@ -1,0 +1,49 @@
+ul {
+    list-style: none;
+}
+
+li {
+    font-size: 25px;
+    font-family: 'Varela Round', sans-serif;
+}
+
+body {
+    margin: auto;
+    text-align: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://www.healthytravelblog.com/wp-content/uploads/2014/03/GamlaStan_Stockholm.jpg');
+    background-size: cover;
+    height: auto;
+    color: white;
+}
+
+#title {
+    font-size: 50px;
+    font-family: 'Varela Round', sans-serif;
+}
+
+#temp {
+    font-size: 35px;
+}
+
+#button {
+    background-color: #0000FF;
+    color: #FFD700;
+    border-radius: 12px;
+    padding: 12px 28px;
+    font-size: 18px;
+    font-family: 'Varela Round', sans-serif;
+}
+
+#button:hover {
+    background-color: #1E90FF;
+    color: #FFFF00;
+    cursor: pointer;
+}
+
+
+
+@media screen and (max-width:640px) {
+    .data {
+        width: 100%;
+    }
+}

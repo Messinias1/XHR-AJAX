@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id='loadTextFile'>Click Here To Load File</button>
+    <div id="loadTextHere"></div>
+    
+    <script>
+        document.getElementById('loadTextFile').addEventListener('click', loadText);
+        
+        function loadText() {
+            var xhrCall = new XMLHttpRequest();
+            
+            var url = 'https://api.github.com/users';
+            
+            xhrCall.open('GET', url, true);
+            // .onload checks the readyState automatically but not the status
+            xhrCall.onload = function() {
+                
+                    var objectData = JSON.parse(this.responseText);
+                    console.log(objectData[0].login);
+                
+            };
+            //   console.log(xhrCall);
+             xhrCall.send();
+        }
+    </script>
+</body>
+</html>
