@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Weather Search</title>
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link rel="stylesheet" href="stylesSearch.css" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1 id="title">Live Weather Search</h1>
+    <br><br>
+    <input type="text" id="citySearch" placeholder="Enter City Name Here"/>
+    <br><br>
+    <button id="button">Show Me The Weather</button>
+    <div id="data"></div>
+
+    <script>
+        document.getElementById('button').addEventListener('click', loadData);
+        
+        // Load weather data
+        function loadData() {
+            var xhr = new XMLHttpRequest();
+            
+            // creating a variable setting it to the value of what gets typed into the input element
+            var citySearch = $('#citySearch').val();
+            // url is where weather info is coming from and setting the variable into the city location
+            var url = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&appid=INSERT-API-KEY-HERE&units=imperial`;
+            
+            xhr.open('GET', url, true);
+
+            xhr.onload = function() {
+                if (this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+
+                    var output = '';
+                    
+                    // creating variables to make data more readable rom JSON file
+                    var temperature = data.main.temp;
+                    var conditions = data.weather[0]['main'];
+                    var humidity = data.main.humidity;
+                    var windSpeed = data.wind.speed;
+                    
+                        output +=
+                            '<div class="data">' +
+                            '<ul>' +
+                            '<li id="temp"> ' + temperature +' '+'°f </li>' +
+                            '<li> ' + conditions + '</li>' +
+                            '<li> Humidity: ' + humidity +' '+'%</li>' +
+                            '<li> Wind Speed: ' + windSpeed +' '+'mp/h</li>' +
+                            '</ul>' +
+                            '</div>';
+                    
+
+                    document.getElementById('data').innerHTML = output;
+                }
+            };
+
+            xhr.send();
+        }
+    </script>
+</body>
+
+</html>
